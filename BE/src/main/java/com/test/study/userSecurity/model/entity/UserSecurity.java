@@ -1,0 +1,25 @@
+package com.test.study.userSecurity.model.entity;
+
+import com.test.study.util.entity.Base;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity(name="userSecurity")
+@Table
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class UserSecurity extends Base {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userSecuritySeq;
+
+    @Column(length = 20, nullable = false, unique = true)
+    private String userId;
+
+    @Column(length = 500, nullable = false)
+    private String salt;
+}

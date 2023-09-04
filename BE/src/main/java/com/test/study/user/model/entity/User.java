@@ -27,12 +27,12 @@ public class User extends Base {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 10/*, nullable = true*/)
-    private String gender;
-
-    @Column/*(nullable = true)*/
-    private int age;
-
     @Column(length = 20, nullable = false)
     private String email;
+
+    @Column(length = 10)
+    private String gender;
+
+    @Column
+    private int age;
 }
