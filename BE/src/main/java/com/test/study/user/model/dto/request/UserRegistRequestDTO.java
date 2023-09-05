@@ -28,12 +28,11 @@ public class UserRegistRequestDTO {
     @NotEmpty
     private String name;
 
-    private String gender;
-
-    private int age;
-
     @NotNull
     @Email
     private String email;
 
+    private String gender;
+
+    private int yearOfBirth;
 }

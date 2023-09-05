@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity(name="userSecurity")
-@Table
+@Table(indexes = {
+        @Index(name = "userSecurity_userId",columnList = "userId"),
+})
 @Getter
 @Builder
 @NoArgsConstructor

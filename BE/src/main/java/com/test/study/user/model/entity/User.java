@@ -1,12 +1,20 @@
 package com.test.study.user.model.entity;
 
 
+import com.test.study.giftCard.model.entity.GiftCard;
+import com.test.study.userBookMark.model.entity.UserBookMark;
+import com.test.study.userCard.model.entity.UserCard;
 import com.test.study.util.entity.Base;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity(name="user")
-@Table
+@Table(indexes = {
+        @Index(name = "user_id",columnList = "id"),
+        @Index(name = "user_email",columnList = "email"),
+})
 @Getter
 @Builder
 @NoArgsConstructor
@@ -34,5 +42,14 @@ public class User extends Base {
     private String gender;
 
     @Column
-    private int age;
+    private int yearOfBirth;
+
+    @OneToMany(mappedBy = "user")
+    private List<GiftCard> giftCards;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserCard> userCards;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserBookMark> userBookMarks;
 }

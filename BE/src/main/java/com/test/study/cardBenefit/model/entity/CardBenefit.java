@@ -1,13 +1,14 @@
 package com.test.study.cardBenefit.model.entity;
 
 import com.test.study.card.model.entity.Card;
-import com.test.study.shopBrand.model.entity.ShopBrand;
 import com.test.study.util.entity.Base;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name="card")
-@Table
+@Entity(name="cardBenefit")
+@Table(indexes = {
+        @Index(name="cardBenefit_shop", columnList = "category, shopName"),
+})
 @Getter
 @Builder
 @NoArgsConstructor
@@ -19,21 +20,26 @@ public class CardBenefit extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cardBenefitSeq;
 
-    /* 혜지 : FK 설정 필요 */
-    private ShopBrand shopBrand;
-
-    /* 혜지 : FK 설정 필요 */
+    /* 혜지 : FK 확인 필요 */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cardName", referencedColumnName = "name")
     private Card card;
+
+    @Column(length = 20, nullable = false)
+    private String category;
+
+    @Column(length = 20, nullable = false)
+    private String shopName;
 
     @Column(length = 100)
     private String content;
 
-    @Column
-    private double discount;
+    @Column(length = 20)
+    private String discount;
 
-    @Column
-    private double point;
+    @Column(length = 20)
+    private String point;
 
-    @Column
-    private double cashBack;
+    @Column(length = 20)
+    private String cashBack;
 }

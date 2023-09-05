@@ -13,7 +13,6 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -22,8 +21,8 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "MoicEntityManager",
-        transactionManagerRef = "MoicTransactionManager",
+        entityManagerFactoryRef = "moicEntityManager",
+        transactionManagerRef = "moicTransactionManager",
 
         /* 혜지 : 작성 시마다 패키지 추가 필요 */
         basePackages = {
@@ -32,7 +31,8 @@ import java.util.HashMap;
                 "com.test.study.cardBenefit.model.repository",
                 "com.test.study.giftCard.model.repository",
                 "com.test.study.shop.model.repository",
-                "com.test.study.shopBrand.model.repository"
+                "com.test.study.userCard.model.repository",
+                "com.test.study.userBookMark.model.repository",
         }
 )
 public class MoicDBConfig {
@@ -53,22 +53,22 @@ public class MoicDBConfig {
         return dataSource;
     }
 
-    @Primary
-    @Bean
-    @ConfigurationProperties("spring.moicDB.datasource")
-    public DataSourceProperties moicDataSourceProperties(){
-        return new DataSourceProperties();
-    }
-
-    @Primary
-    @Bean
-    @ConfigurationProperties("spring.moicDB.datasource.configuration")
-    public DataSource moicDataSourceConfig(){
-        return moicDataSourceProperties()
-                .initializeDataSourceBuilder()
-                .type(HikariDataSource.class)
-                .build();
-    }
+//    @Primary
+//    @Bean
+//    @ConfigurationProperties("spring.moicDB.datasource")
+//    public DataSourceProperties moicDataSourceProperties(){
+//        return new DataSourceProperties();
+//    }
+//
+//    @Primary
+//    @Bean
+//    @ConfigurationProperties("spring.moicDB.datasource.configuration")
+//    public DataSource moicDataSourceConfig(){
+//        return moicDataSourceProperties()
+//                .initializeDataSourceBuilder()
+//                .type(HikariDataSource.class)
+//                .build();
+//    }
 
     @Primary
     @Bean
@@ -88,7 +88,8 @@ public class MoicDBConfig {
                 "com.test.study.cardBenefit.model.entity",
                 "com.test.study.giftCard.model.entity",
                 "com.test.study.shop.model.entity",
-                "com.test.study.shopBrand.model.entity",
+                "com.test.study.userCard.model.entity",
+                "com.test.study.userBookMark.model.entity",
         });
 
         bean.setJpaVendorAdapter(vendorAdapter);

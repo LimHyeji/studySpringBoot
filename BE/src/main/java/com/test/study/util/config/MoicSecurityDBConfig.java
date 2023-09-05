@@ -22,8 +22,8 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "MoicSecurityEntityManager",
-        transactionManagerRef = "MoicSecurityTransactionManager",
+        entityManagerFactoryRef = "moicSecurityEntityManager",
+        transactionManagerRef = "moicSecurityTransactionManager",
 
         /* 혜지 : 패키지 추가 완료 */
         basePackages = {"com.test.study.userSecurity.model.repository",}
@@ -33,7 +33,6 @@ public class MoicSecurityDBConfig {
     @Autowired
     private Environment env;
 
-    @Primary
     @Bean
     public DataSource moicSecurityDataSource(){
         DriverManagerDataSource dataSource=new DriverManagerDataSource();
@@ -46,24 +45,21 @@ public class MoicSecurityDBConfig {
         return dataSource;
     }
 
-    @Primary
-    @Bean
-    @ConfigurationProperties("spring.moicSecurityDB.datasource")
-    public DataSourceProperties moicSecurityDataSourceProperties(){
-        return new DataSourceProperties();
-    }
+//    @Bean
+//    @ConfigurationProperties("spring.moicSecurityDB.datasource")
+//    public DataSourceProperties moicSecurityDataSourceProperties(){
+//        return new DataSourceProperties();
+//    }
+//
+//    @Bean
+//    @ConfigurationProperties("spring.moicSecurityDB.datasource.configuration")
+//    public DataSource moicSecurityDataSourceConfig(){
+//        return moicSecurityDataSourceProperties()
+//                .initializeDataSourceBuilder()
+//                .type(HikariDataSource.class)
+//                .build();
+//    }
 
-    @Primary
-    @Bean
-    @ConfigurationProperties("spring.moicSecurityDB.datasource.configuration")
-    public DataSource moicSecurityDataSourceConfig(){
-        return moicSecurityDataSourceProperties()
-                .initializeDataSourceBuilder()
-                .type(HikariDataSource.class)
-                .build();
-    }
-
-    @Primary
     @Bean
     public LocalContainerEntityManagerFactoryBean moicSecurityEntityManager(){
         LocalContainerEntityManagerFactoryBean bean
@@ -84,7 +80,6 @@ public class MoicSecurityDBConfig {
         return bean;
     }
 
-    @Primary
     @Bean
     public PlatformTransactionManager moicSecurityTransactionManager(){
         JpaTransactionManager transactionManager=new JpaTransactionManager();
