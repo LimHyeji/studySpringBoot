@@ -6,3 +6,4 @@
 > 3. Redis Multi Server
 > 4. MariaDB Multi Server ✔️
 > 5. Validation ✔️
+> 6. QueryDSL
